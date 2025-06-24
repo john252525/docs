@@ -1,17 +1,7 @@
 # 📘 Binder API VendorController Documentation
 
-## Base Path
+## Module Base Path
 `/api/v1/vendor/{method}`
-
-## Authentication
-- API Key: Header: `X-Api-Key` или parameter: `key`
-
-## Error Format
-```json
-{
-  "ok": false,
-  "errors": ["error_message"]
-}
 
 
 ## `getAll`
