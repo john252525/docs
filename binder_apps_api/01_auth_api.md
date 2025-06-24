@@ -3,8 +3,9 @@
 Базовый путь:  
 `/api/v1/auth/{method}`
 
-## Api key
-Передается либо в заголовках (`X-Api-Key`), либо в параметрах - `key`
+## Авторизация
+Через заголовок `Bearer Token`
+Authorization: Bearer received_token
 
 
 ## Ошибки:
