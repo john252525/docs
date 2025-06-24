@@ -126,44 +126,12 @@
 - **200 OK**
 ```json
 {
-  "ok": true,
-  "message": "Login successful.",
-  "data": {
-    "token": "jwt_token_here" // можно позже использовать токен для верификации запросов
-  }
-}
-```
-## `verifyToken`
-
-**POST** `/api/v1/auth/verifyToken`
-
-### Описание:
-Проверка JWT токена на валидность.
-
-Можно передавать как в заголовке, так и в теле запроса.
-
-### Заголовок:
-```
-Authorization: Bearer your_jwt_token
-```
-
-### Или тело запроса:
-```json
-{
-  "token": "your_jwt_token"
+	"ok": true,
+	"message": "Login successful.",
+	"data": {
+		"token": "eyJ0...Yo",
+		"expires_in": 604800
+	}
 }
 ```
 
-### Ответ:
-- **200 OK**
-```json
-{
-  "ok": true,
-  "message": "Token verified",
-  "data": {
-    "vendor_id": 1,
-    "email": "user@example.com",
-    "exp": 9999999999
-  }
-}
-```
