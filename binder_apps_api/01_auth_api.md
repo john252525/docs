@@ -129,9 +129,41 @@
 	"ok": true,
 	"message": "Login successful.",
 	"data": {
-		"token": "eyJ0...Yo",
-		"expires_in": 604800
+		"token": "eyJ0eXA...NiJ9.eyJ2ZW5...4ODczOH0.-V9rem...iI00",
+		"expires_at": "2025-07-02 20:38:58",
+		"refresh_token": "e89ace5b...27d5",
+		"refresh_expires_at": "2025-09-23 20:38:58"
 	}
 }
 ```
+
+## `verifyToken`
+
+**POST** `/api/v1/auth/verifyToken`
+`
+
+### Описание:
+Проверка токена (на истечение или отзыв).
+
+### Тело запроса:
+```json
+{
+  "token": "fghgjkhjlydfg",
+}
+```
+
+### Ответ:
+- **200 OK**
+```json
+{
+	"ok": true,
+	"message": "Token verified",
+	"data": {
+		"vendor_id": "999",
+		"email": "vendor@gmail.com",
+		"exp": 1751486915
+	}
+}
+```
+
 

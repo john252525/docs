@@ -110,45 +110,55 @@
 **GET** `/api/v1/vendors/getRefId/{vendorId}`
 
 ### Описание:
-Получить реферальный ID вендора (пока это uuid).
-
-### Ответ:
-- **200 OK**
-```json
-{
-  "ok": true,
-  "data": {
-    "ref_id": "deaa8077-604d-4507-96f8-2ebaf27c531b"
-  }
-}
-```
-
-
-## `addReferral`
-
-**POST** `/api/v1/vendors/addReferral/{vendorId}`
-
-### Описание:
-Добавить реферала вендора.
-`{vendorId}` - id реферрера
-Перед добавлением реферала приглпшенный вендор должен уже существовать в базе!
-
-### Тело запроса:
-```json
-{
-  "email": "newvendor@example.com",
-}
-```
-`email` - почта приглашенного вендора
+Получить реферальный ID вендора - JWT токен с закодированным uuid вендора в payload.
 
 ### Ответ:
 - **200 OK**
 ```json
 {
 	"ok": true,
-	"message": "Referral added"
+	"data": {
+		"ref_id": "eyJ0eX...1NiJ9.WyIx...UiXQ.LP3r...p_TI"
+	}
 }
 ```
+
+
+## `addReferral`
+
+**POST** `/api/v1/vendors/addReferral`
+
+### Описание:
+Добавить реферала вендора.
+Перед добавлением реферала приглпшенный вендор должен уже существовать в базе!
+То есть сначала вызывается метод register и если он успешно завершился, вызывается данный метод.
+
+### Тело запроса:
+```json
+{
+	"ref_id": "ey...JI1NiJ9.Wy...iXQ.LP3r9ECdyp8....Hp_TI",
+  	"email": "newvendor@example.com"
+}
+```
+`ref_id` - JWT токен, служащий как `ref_id`, в payload закодирован `uuid` вендора, токен безсрочный (на фронте ничего извлекать не надо, просто передать токен на бекенд)
+`email` - почта приглашенного вендора, использующаяся при регистрации
+
+### Ответ:
+- **200 OK**
+```json
+{
+	"ok": true,
+	"message": "Referral added",
+	"data": {
+		"parent_uuid": "1d2d78...85e",
+		"referral_uuid": "fgh....ddfg"
+	}
+}
+```
+`parent_uuid` - uuid родительского вендора 
+`referral_uuid` - uuid вендора - реферала
+возвращаются просто для информации
+
 
 ## `getAllReferrals`
 
