@@ -1,7 +1,7 @@
 # 📘 Binder API VendorController Documentation
 
 ## Module Base Path
-`/api/v1/vendor/{method}`
+`/api/v1/users/{method}`
 
 
 ## `getRefId`
@@ -27,7 +27,7 @@
 ## `addReferral`
 ### Доступ: `public`
 
-**POST** `/api/v1/vendors/addReferral`
+**POST** `/api/v1/users/addReferral`
 
 ### Описание:
 Добавить реферала.
