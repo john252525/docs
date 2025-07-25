@@ -1,4 +1,4 @@
-# 📘 Binder API VendorController Documentation
+# 📘 Binder API UserController Documentation
 
 ## Module Base Path
 `/api/v1/users/{method}`
