@@ -8,3 +8,4 @@
 [Tariffs API](binder_apps_api/03_tariffs_api.md)\
 [Subscriptions API](binder_apps_api/04_subscriptions_api.md)\
 [Forms API](binder_apps_api/05_forms_api.md)\
+[Instances API](binder_apps_api/06_instances.md)\
