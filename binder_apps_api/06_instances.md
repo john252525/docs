@@ -20,6 +20,18 @@
 Для мессенджеров может быть указан `source` (whatsapp, telegram)\
 Для CRM может быть указан `type` (amocrm, bitrix24, megaplan) и `with_tokens` (по умолчанию - false)
 
+**POST** `api/v1/instances/getInfoByToken
+Параметры можно передавать в виде массивов:
+### Тело запроса (необязательное):
+```json
+{
+"group" : ["messenger", "crm", "bulk"],
+"source" : ["telegram", "whatsapp"],
+"type" : ["amocrm", "bitrix24"]
+}
+```
+> Данный пример равносилен вызову метода без параметров, то есть вернутся все аккаунты
+
 
 ### Ответ:
 - **200 OK**
