@@ -51,6 +51,30 @@
 `chats_url` - готовая ссылка чатов пользователя, которую можно открывать во фрейме
 `email` и `user_id` - просто дополнительная информация по пользователю приложения, для которого была сформирована ссылка
 
+
+## `get-url`
+
+**GET** `auth/get-url`
+
+### Описание:
+Получить url чата пользователя
+
+### Ответ:
+- **200 OK**
+```json
+{
+	"ok": true,
+	"message": "Authentication successful",
+	"data": {
+		"chats_url": "https://chat.touch-api.com/chat/?satkn=c0ba2e8c-6dbd-4052-b08f-991ccfc74e24",
+		"email": "mail@mail.com",
+		"user_id": 235
+	}
+}
+```
+
+---
+
 ## `add`
 
 **POST** `/account/add`
