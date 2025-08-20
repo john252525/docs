@@ -12,7 +12,7 @@
 
 ## Документация Touchapi chats API для приложений
 [Общая информация по API](touchapi-chats-api/00_common.md)\
-[API methods](touchapi-chats-api/01_methods.md)\
+[API methods](touchapi-chats-api/01_methods.md)
 
 
 
