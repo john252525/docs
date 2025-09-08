@@ -13,21 +13,51 @@
 Регистрация нового пользователя и отправка письма для подтверждения почты.
 
 ### Тело запроса:
+#### Минимальное:
 ```json
 {
   "email": "vendor@example.com",
   "password": "password123",
 }
 ```
+#### C Ref ID:
+```json
+{
+  "email": "vendor@example.com",
+  "password": "password123",
+  "ref_id": "000020a37dc",
+}
+```
+
 
 ### Успешный ответ:
 - **200 OK**
 ```json
 {
   "ok": true,
-  "message": "Registration successful. Email sent."
+  "message": "Registration successful. Email sent.",
+  "data": {
+	"result": true
+  }
 }
 ```
+`Если был передан Ref ID`:
+```json
+{
+	"ok": true,
+	"message": "Registration successful. Verification email sent.",
+	"data": {
+		"result": true,
+		"referral_result": {
+			"success": true,
+			"message": "User has been registred as referral",
+			"referral_link_id": 1234
+		}
+	}
+}
+```
+
+
 
 ---
 
