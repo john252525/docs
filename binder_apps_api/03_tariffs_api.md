@@ -74,6 +74,124 @@
 ```
 
 
+## 'tariffs/getByCodeWithMods`
+### Доступ: `user`
+
+**POST** `/api/v1/tariffs/getByCodeWithMods`
+
+### Описание:
+Получить все действующие тарифы для определенного типа вендора с модификаторами, бонусами и ценой со скидками.
+
+### Тело запроса:
+```json
+{
+	"code": "touchapi-whatsapp"
+}
+```
+
+### Ответ:
+- **200 OK**
+```json
+{
+	"ok": true,
+	"message": null,
+	"data": [
+		{
+      //массив тарифов
+	  	{
+			"id": 6,
+			"code": "standard",
+			"period": "1m",
+			"limits": {
+				"dialogs": 100,
+				"messages": -1,
+				"write_first": true,
+				"group_chats": true
+			},
+			"name": "Standard 1 Month",
+			"price": 1500,
+			"final_price": 800,
+			"currency": "RUB",
+			"mods": [
+				{
+					"id": 1,
+					"brand_slug": "brand",
+					"code": "discount_next_channel_1_500",
+					"promo_code": "",
+					"description": "Discount for every next channel paid",
+					"type": "discount",
+					"accumulative_limit": 1,
+					"amount": 500,
+					"amount_unit": "currency",
+					"data": [],
+					"is_applied": false
+				},
+				{
+					"id": 5,
+					"brand_slug": "brand",
+					"code": "bonus_subscription_bulk",
+					"promo_code": "",
+					"description": "Bulk subscription bonus",
+					"type": "bonus",
+					"accumulative_limit": 0,
+					"amount": 1,
+					"amount_unit": "subscription",
+					"data": [
+						{
+							"code": "whatsapi-bulk"
+						}
+					],
+					"is_applied": true
+				},
+				{
+					"id": 6,
+					"brand_slug": "brand",
+					"code": "discount_next_channel_1_700",
+					"promo_code": "",
+					"description": "Discount for every next channel paid",
+					"type": "discount",
+					"accumulative_limit": 1,
+					"amount": 700,
+					"amount_unit": "currency",
+					"data": [],
+					"is_applied": false
+				},
+				{
+					"id": 7,
+					"brand_slug": "brand",
+					"code": "discount_next_channel_1_200",
+					"promo_code": "",
+					"description": "Discount for every next channel paid",
+					"type": "discount",
+					"accumulative_limit": 1,
+					"amount": 200,
+					"amount_unit": "currency",
+					"data": [],
+					"is_applied": false
+				}
+			],
+			"bonuses": [
+				{
+					"mod_id": 5,
+					"tariff_code": "whatsapi-bulk",
+					"tariff_period": "1m",
+					"multiplier": 1
+				}
+			]
+		},
+		}
+	]
+}
+```
+Новые поля:
+`limits` - установленные лимиты по тарифу (можно их выводить в тариф, кроме групповых чатов, так как у нас это не реализовано)
+> -1 - значит безлимит, ограничение не установлено
+`final_price` - цена после примененных скидок для текущего пользователя (цена по которой пользователь может приобрести подписку на данный момент)
+`mods` - все доступные модификаоры по тарифу. Для информации можно выводить пользователю описание бонусов - `type` - `bonus`
+`bonuses` - массив бонусов, которые будут применены, если покупка произойдет в данный момент (сейчас это только подписки в подарок). В бонусе указан код тарифа и период, на основании которого будет создана бесплатная подписка. Если подходящего тарифа нет, будет указан тариф с периодом `1m` и `multiplier`
+> Если `multiplier` = 0, это значит, что бонус применен не будет (не найден тариф, который можно использовать)
+> Информацию по бонусам надо отправлять при покупке подписки (см. `subscriptions/createSubscriptions`)
+
 ## '/tariffs/3/getById`
 ### Доступ: `user`
 
