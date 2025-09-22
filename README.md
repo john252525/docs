@@ -9,6 +9,7 @@
 [Subscriptions API](binder_apps_api/04_subscriptions_api.md)\
 [Forms API](binder_apps_api/05_forms_api.md)\
 [Instances API](binder_apps_api/06_instances.md)\
+[Invoices API](binder_apps_api/07_invoices.md)\
 
 ## Документация Touchapi chats API для приложений
 [Общая информация по API](touchapi-chats-api/00_common.md)\
