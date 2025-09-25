@@ -59,11 +59,13 @@
 ## `generateInvoice`
 ### Доступ: `user`
 
-**GET** `api/v1//invoices/generateInvoice`
+**GET** `api/v1/invoices/generateInvoice`
 
 ### Описание:
 Получает ссылку на сгенерированный счет. Цель: дать пользователям возможность оплатить с р/с компании.
 
+### Параметры
+`sum` - сумма пополнения (`api/v1/invoices/generateInvoice?sum=2500`)
 
 ### Ответ:
 - **200 OK**
