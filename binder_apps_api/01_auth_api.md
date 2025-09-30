@@ -20,14 +20,18 @@
   "password": "password123",
 }
 ```
-#### C Ref ID:
+#### C Ref ID и контактным телефоном:
 ```json
 {
-  "email": "vendor@example.com",
-  "password": "password123",
-  "ref_id": "000020a37dc",
+  	"email": "vendor@example.com",
+  	"password": "password123",
+  	"ref_id": "000020a37dc",
+  	"phone": "+79909009090",
+	"contact_preferred_channels": ["call", "telegram"]
 }
 ```
+`phone` - принимается в любом формате (будет приведен к числовому виду для сохранения в базе)
+`contact_preferred_channels` - предпочитаемые каналы связи. Четких правил нет, передается просто как массив строк, никакой обработки на беке не будет. Как будут сохранены, так позже и получены.
 
 
 ### Успешный ответ:

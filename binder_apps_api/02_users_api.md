@@ -104,3 +104,60 @@
 > Активность пользователя определять по совокупности `is_verified` и `enable`
 
 
+## `getContact`
+### Доступ: `user`
+
+**GET** `/api/v1/users/getContact`
+
+### Описание:
+Получить получает контактную информацию, если она есть.
+
+### Ответ:
+- **200 OK**
+```json
+{
+	"ok": true,
+	"message": "User contact",
+	"data": {
+		"phone": "79909009090",
+		"contact_preferred_channels": [
+			"call",
+			"telegram"
+		]
+	}
+}
+```
+`phone` - всегда возвращается в числовом виде, даже если при сохранении формат был иным
+
+
+
+## `saveContact`
+### Доступ: `user`
+
+**POST** `/api/v1/users/saveContact`
+
+### Описание:
+Сохраняет контактный телефон и предпочитаемые каналы связи пользователя.
+
+### Тело запроса:
+```json
+{
+	"phone": "+7(892)6807892",
+	"contact_preferred_channels": ["call"]
+}
+```
+`phone` - телефон в любом формате (для сохранения будет приведет к числовому виду)
+`contact_preferred_channels` - массив предпочитаемых каналов связи (без жестких критериев)
+
+### Ответ:
+- **200 OK**
+```json
+{
+	"ok": true,
+	"message": "User contact saved",
+	"data": {
+		"phone_update_result": true,
+		"preferred_channels_update_result": true
+	}
+}
+```
