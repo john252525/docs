@@ -11,7 +11,7 @@
 [Instances API](binder_apps_api/06_instances.md)\
 [Invoices API](binder_apps_api/07_invoices.md)\
 [Vendor Groups API](binder_apps_api/08_vendor_groups.md)\
-[Uon Account API](binder_apps_api/09_uon_account.md)\
+[Uon Account API](binder_apps_api/09_uon_account.md)
 
 ## Документация Touchapi chats API для приложений
 [Общая информация по API](touchapi-chats-api/00_common.md)\
