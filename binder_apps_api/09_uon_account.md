@@ -5,6 +5,9 @@
 ## Module Base Path
 `/uon-account/{method}`
 
+### Авторизация
+[Общая информация по API](/00_common.md)
+
 ## `blockMessengerUser`
 **POST** `/uon-account/blockMessengerUser`
 
@@ -102,5 +105,89 @@
             "hook_id": "0"
         }
     ]
+}
+```
+
+## Настройки аккаунта UON
+
+## `getSettings`
+**GET** `/uon-account/getSettings`
+**POST** `/uon-account/getSettings`
+
+## Обязательный параметр
+`uuid` - UUID вендора uon
+
+### Ответ:
+- **200 OK**
+```json
+{
+	"ok": true,
+	"message": "Settings received",
+	"data": {
+		"clients": {
+			"set_default_manager": true
+		},
+		"requests": {
+			"disable": false,
+			"disable_creation": false,
+			"set_default_manager": true
+		},
+		"actions": {
+			"block": false,
+			"block_incoming": false,
+			"block_outgoing": false
+		}
+	}
+}
+```
+- всегда возвращаются параметры по умолчанию, даже если у вендора их нет в базе данных.
+
+## Описание
+`clients` - настройки для сущености `client` (клиент) в uon\
+`requests` - настройки для сущености `request` (обращение) в uon\
+`actions` - настройки для сущености `request action` (касание) в uon
+
+`set_default_manager` - устанавливать менеджера по умолчанию при создании новых клиентов и обращений (например, первого активного, если не определено настройками)
+
+`requests.disable` - отключить поиск и создание обращений, никакие касания не добавляются в обращения, только в историю общения клиента\
+`requests.disable_creation` - отключить создание обращений (если обращение есть, то касание будет добавлено в него)
+
+`actions.block` - заблокировать создание касаний в U-ON (блокируются все сообщения, и входящие, и исходящие (из мессенджера), но можно отправлять исходящие из U-ON)\
+`actions.block_incoming` - заблокировать создание касаний в U-ON для входящих (если пришло сообщение в подключенный мессенджер, в UON оно не пробрасывается)\
+`actions.block_outgoing` - заблокировать создание касаний в U-ON для исходящих (если писать из мессенджера, то в U-ON такие сообщения пробрасываться не будут)
+
+
+## `saveSettings`
+**POST** `/uon-account/saveSettings`
+
+## Обязательный параметр
+`uuid` - UUID вендора uon (GET параметром или в теле)
+
+### Тело запроса (обязательно):
+```json
+{
+    "clients": {
+        "set_default_manager": true
+    },
+    "requests": {
+        "disable": false,
+        "disable_creation": false,
+        "set_default_manager": true
+    },
+    "actions": {
+        "block": false,
+        "block_incoming": false,
+        "block_outgoing": false
+    }
+}
+```
+
+### Ответ:
+- **200 OK**
+```json
+{
+	"ok": true,
+	"message": "Settings saved",
+	"data": true
 }
 ```
