@@ -191,3 +191,149 @@
 	"data": true
 }
 ```
+
+
+## getHistory
+**GET** или **POST** `/uon-account/getHistory`
+
+## Обязательные параметры:
+`uuid` - UUID вендора U-ON\
+`user_id` - ID пользователя (если не авторизован)
+
+## Опциональные параметры:
+`date_from` - начальная дата (формат YYYY-MM-DD или YYYY-MM-DD HH:MM:SS)\
+`date_to` - конечная дата (формат YYYY-MM-DD или YYYY-MM-DD HH:MM:SS)\
+`page` - номер страницы (по умолчанию: 1)\
+`per_page` - количество записей на странице (по умолчанию: 50)\
+`messenger` - фильтр по мессенджеру: whatsapp, telegram, max, vk\
+`status` - фильтр по статусу: pending, success, fail\
+`filter_by_vendor` - фильтровать только по текущему U-ON вендору (true/false, по умолчанию false), если параметр не установлен, будут выведены все сообщения (в том числе где uon_vendor_id = 0)
+
+## Специфичные методы поиска (приоритетные):
+`search_number` - поиск по номеру телефона (обязателен date_from)\
+`request_id` - поиск по request_id\
+`hook_id` - поиск по hook_id
+
+
+### Минимальное тело запроса (либо GET параметры):
+```json
+{
+    "uuid": "a7e08aef-967b-49d2-906c-e99d45833011",
+    "user_id": 170,
+    "date_from": "2024-01-01",
+    "date_to": "2024-01-31"
+}
+```
+
+```json
+{
+    "uuid": "a7e08aef-967b-49d2-906c-e99d45833011",
+    "user_id": 170,
+    "date_from": "2024-01-01",
+    "date_to": "2024-01-31",
+    "messenger": "whatsapp",
+    "status": "success",
+    "filter_by_vendor": true,
+    "page": 1,
+    "per_page": 50
+}
+```
+
+### Ответ:
+- **200 OK**
+```json
+{
+	"ok": true,
+	"message": "History received",
+	"data": {
+		"messages": [
+			{
+				"id": "66",
+				"user_id": "132",
+				"uon_vendor_id": "5",
+				"hook_id": "1856299",
+				"task_id": "54376",
+				"messenger": "telegram",
+				"sent_from": "miytgmtum4wtknbxga",
+				"sent_to": "user_id-5742728215",
+				"number": "79366000000",
+				"outgoing": "1",
+				"from_messenger": "1",
+				"manager_user_id": "0",
+				"tourist_user_id": "24",
+				"content": "вот",
+				"request_id": "930",
+				"action_id": "69623",
+				"thread": "user_id-5742728215",
+				"item": "160435",
+				"status": "success",
+				"fail_reason": "0",
+				"meta": "{}",
+				"dt_ins": "2026-02-01 19:34:18",
+				"dt_upd": "2026-02-01 19:34:19",
+				"dt_msg": "2026-02-01 19:34:18"
+			},
+            {
+				"id": "1",
+				"user_id": "132",
+				"uon_vendor_id": "5",
+				"hook_id": "1856211",
+				"task_id": "54343",
+				"messenger": "telegram",
+				"sent_from": "miytgmtum4wtknbxga",
+				"sent_to": "user_id-5742728215",
+				"number": "79366000000",
+				"outgoing": "1",
+				"from_messenger": "1",
+				"manager_user_id": "0",
+				"tourist_user_id": "24",
+				"content": "",
+				"request_id": "930",
+				"action_id": "69601",
+				"thread": "user_id-5742726215",
+				"item": "160413",
+				"status": "success",
+				"fail_reason": "0",
+				"meta": "{}",
+				"dt_ins": "2026-02-01 19:27:09",
+				"dt_upd": "2026-02-01 19:27:11",
+				"dt_msg": "2026-02-01 19:27:08"
+			}
+		],
+		"pagination": {
+			"current_page": 20,
+			"per_page": 50,
+			"total": 973,
+			"total_pages": 20
+		},
+		"dictionaries": {
+			"statuses": {
+				"pending": "В ожидании",
+				"success": "Успешно",
+				"fail": "Ошибка",
+				"": ""
+			},
+			"fail_reasons": {
+				"unknown": "Неизвестная ошибка",
+				"no_binds": "Канал с CRM не создан",
+				"no_binds_after_filter": "Подходящий канал не найден",
+				"no_subscription": "Нет подписки",
+				"binds_disabled": "Канал с CRM отключен",
+				"messenger_not_set": "Не выбран мессенджер",
+				"privacy_settings": "Номер телефона закрыт",
+				"blocked_by_settings": "Заблокировано настройками",
+				"api_error": "Ошибка API",
+				"limit_reached": "Лимит запросов исчерпан",
+				"network_issue": "Сетевая проблема",
+				"no_phone": "Номер телефона не найден"
+			},
+			"messengers": {
+				"whatsapp": "WhatsApp",
+				"telegram": "Telegram",
+				"max": "MAX",
+				"vk": "VK"
+			}
+		}
+	}
+}
+```
