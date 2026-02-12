@@ -337,3 +337,80 @@
 	}
 }
 ```
+
+
+## `getCustomSources`
+**GET** **POST** `/uon-account/getCustomSources`
+
+## Обязательный параметр
+`uuid` - UUID вендора uon (GET параметром или в теле)
+
+### Ответ:
+- **200 OK**
+```json
+{
+	"ok": true,
+	"message": "Sources received",
+	"data": {
+		"sources": [
+			{
+				"6f53b4fe-120f-48d9-9b56-e9c6a0b70520": "Custom Whatsapp Source"
+			},
+			{
+				"a7e08aef-967b-49d2-906c-e99d45833011": "Custom Telegram Source"
+			}
+		]
+	}
+}
+```
+Если нет сохраненных источников:
+- **200 OK**
+```json
+{
+	"ok": true,
+	"message": "No sources found",
+	"data": {
+		"sources": []
+	}
+}
+```
+Ошибка:
+- **401 Bad Request**
+```json
+{
+	"ok": false,
+	"message": "Failed to init UonAccountController",
+	"errors": [
+		"Uon account uuid is required"
+	]
+}
+```
+
+
+## `saveCustomSources`
+**POST** `/uon-account/saveCustomSources`
+
+### Тело запроса:
+```json
+{
+"uuid": "2e31b1d9-e359-41ef-9fef-3f768f45907a",
+"sources": [
+		{"6f53b4fe-120f-48d9-9b56-e9c6a0b70520": "Custom Whatsapp Source"},
+		{"a7e08aef-967b-49d2-906c-e99d45833011": "Custom Telegram Source"}
+	]
+}
+```
+`sources` - массив UUID мессенджера и название источника, заданного пользователем для этого мессенджера
+
+
+### Ответ:
+- **200 OK**
+```json
+{
+	"ok": true,
+	"message": "Sources saved",
+	"data": {
+		"result": true
+	}
+}
+```
