@@ -54,32 +54,36 @@
 {
 	"ok": true,
 	"message": "Notifications retrieved",
-	"data": [
-		{
-			"id": 1,
-			"user_id": 42,
-			"type": "article",
-			"item_id": 5,
-			"title": "Новая статья опубликована",
-			"body": "Опубликована статья 'Как работать с API'",
-			"is_read": 0,
-			"dt_ins": "2025-03-20 10:00:00",
-			"entity": {
-				"title": "Как работать с API",
-				"description": "Подробное руководство по работе с API",
-				"content": "<p>Содержание статьи...</p>"
+	"data": {
+		"data": [
+			{
+				"id": "64",
+				"user_id": "170",
+				"type": "article",
+				"item_id": "2",
+				"is_read": "0",
+				"dt_read": null,
+				"dt_ins": "2026-03-23 21:37:02",
+				"dt_upd": "2026-03-23 21:37:02",
+				"entity": {
+					"title": "Важное обновление",
+					"description": "Краткое описание новости",
+					"content": "# Заголовок\n\nТекст новости в **Markdown**."
+				}
 			}
+		],
+		"paginator": {
+			"total_items": 1,
+			"total_pages": 1,
+			"current_page": 1,
+			"per_page": 20,
+			"has_next": false,
+			"has_prev": false
 		}
-	],
-	"paginator": {
-		"total_items": 15,
-		"total_pages": 2,
-		"current_page": 1,
-		"per_page": 20
 	}
 }
 ```
-- `entity` присутствует только при `full=true` и для типов уведомлений, поддерживающих обогащение (сейчас только `article`).  
+- `entity` присутствует только при `full=true` и для типов уведомлений, поддерживающих обогащение (сейчас только `article`).
 - Для типа `message` поле `entity` равно `null` (до реализации MessageService).
 
 ---
@@ -105,19 +109,21 @@
 {
 	"ok": true,
 	"message": "Unread notifications retrieved",
-	"data": [
-		{
-			"id": 2,
-			"user_id": 42,
-			"type": "article",
-			"item_id": 6,
-			"title": "Новое обновление",
-			"body": "Вышло обновление 2.0",
-			"is_read": 0,
-			"dt_ins": "2025-03-21 09:00:00"
-		}
-	],
-	"total": 1
+	"data": {
+		"notifications": [
+			{
+				"id": "64",
+				"user_id": "170",
+				"type": "article",
+				"item_id": "2",
+				"is_read": "0",
+				"dt_read": null,
+				"dt_ins": "2026-03-23 21:37:02",
+				"dt_upd": "2026-03-23 21:37:02"
+			}
+		],
+		"total": 1
+	}
 }
 ```
 
