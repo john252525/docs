@@ -14,14 +14,19 @@
 **GET** `/api/v1/notifications/test`
 
 ### Описание:
-Тестовый метод для проверки работоспособности модуля уведомлений.
+Тестовый метод для проверки работоспособности контроллера.
 
 ### Ответ:
 - **200 OK**
 ```json
 {
 	"ok": true,
-	"message": "Notification module works"
+	"message": "Success",
+	"data": {
+		"input_data": {
+			"referer": "https://whatsapi.developtech.ru/"
+		}
+	}
 }
 ```
 
@@ -194,14 +199,19 @@
 **GET** `/api/v1/articles/test`
 
 ### Описание:
-Тестовый метод для проверки работоспособности модуля статей.
+Тестовый метод для проверки работоспособности контроллера.
 
 ### Ответ:
 - **200 OK**
 ```json
 {
 	"ok": true,
-	"message": "Article module works"
+	"message": "Success",
+	"data": {
+		"input_data": {
+			"referer": "https://whatsapi.developtech.ru/"
+		}
+	}
 }
 ```
 
@@ -228,25 +238,30 @@
 {
 	"ok": true,
 	"message": "Published articles retrieved",
-	"data": [
-		{
-			"id": 1,
-			"title": "Как работать с API",
-			"description": "Подробное руководство по работе с API",
-			"content": "<p>Содержание статьи...</p>",
-			"image": "https://example.com/image.jpg",
-			"category": "news",
-			"author_id": 42,
-			"status": "published",
-			"dt_ins": "2025-03-15 12:00:00",
-			"dt_published": "2025-03-15 12:00:00"
+	"data": {
+		"data": [
+			{
+				"id": "2",
+				"title": "Важное обновление",
+				"description": "Краткое описание новости",
+				"content": "# Заголовок\n\nТекст новости в **Markdown**.",
+				"image": "https://example.com/image.jpg",
+				"category": "news",
+				"status": "published",
+				"author_id": null,
+				"dt_ins": "2026-03-23 21:37:02",
+				"dt_upd": "2026-03-23 21:37:02",
+				"dt_published": "2026-03-23 21:37:02"
+			}
+		],
+		"paginator": {
+			"total_items": 1,
+			"total_pages": 1,
+			"current_page": 1,
+			"per_page": 20,
+			"has_next": false,
+			"has_prev": false
 		}
-	],
-	"paginator": {
-		"total_items": 10,
-		"total_pages": 1,
-		"current_page": 1,
-		"per_page": 20
 	}
 }
 ```
@@ -259,7 +274,8 @@
 **GET** `/api/v1/articles/getAll`
 
 ### Описание:
-Получить список статей (всех статусов) с возможностью фильтрации. Доступен только администраторам.
+Получить список статей (всех статусов, неопубликованных, опубликованных, архивных) с возможностью фильтрации по статусу.
+Метод для отоборажения статей в админке. На стороне пользователя доступа к методу быть не должно. На стороне пользователя должен использоваться метод getPublished.
 
 ### Параметры запроса (query):
 | Параметр | Тип | Описание |
@@ -275,33 +291,56 @@
 {
 	"ok": true,
 	"message": "Articles retrieved",
-	"data": [
-		{
-			"id": 1,
-			"title": "Как работать с API",
-			"description": "Подробное руководство",
-			"content": "<p>Содержание...</p>",
-			"image": "https://example.com/image.jpg",
-			"category": "news",
-			"author_id": 42,
-			"status": "published",
-			"dt_ins": "2025-03-15 12:00:00",
-			"dt_published": "2025-03-15 12:00:00"
-		},
-		{
-			"id": 2,
-			"title": "Черновик",
-			"description": "Статья в работе",
-			"content": "<p>Незаконченная статья</p>",
-			"status": "draft",
-			"dt_ins": "2025-03-16 09:00:00"
+	"data": {
+		"data": [
+			{
+				"id": "2",
+				"title": "Важное обновление",
+				"description": "Краткое описание новости",
+				"content": "# Заголовок\n\nТекст новости в **Markdown**.",
+				"image": "https://example.com/image.jpg",
+				"category": "news",
+				"status": "published",
+				"author_id": null,
+				"dt_ins": "2026-03-23 21:37:02",
+				"dt_upd": "2026-03-23 21:37:02",
+				"dt_published": "2026-03-23 21:37:02"
+			},
+			{
+				"id": "3",
+				"title": "Новые функции",
+				"description": "Вторая новость",
+				"content": "# Заголовок\n\nТекст новости в **Markdown**. unpublished",
+				"image": "https://example.com/image_22.jpg",
+				"category": "news",
+				"status": "draft",
+				"author_id": null,
+				"dt_ins": "2026-03-30 10:22:45",
+				"dt_upd": "2026-03-30 10:22:45",
+				"dt_published": null
+			},
+			{
+				"id": "1",
+				"title": "Важное обновление",
+				"description": "Краткое описание новости",
+				"content": "# Заголовок\n\nТекст новости в **Markdown**.",
+				"image": "https://example.com/image.jpg",
+				"category": "news",
+				"status": "draft",
+				"author_id": null,
+				"dt_ins": "2026-03-23 21:36:02",
+				"dt_upd": "2026-03-23 21:36:02",
+				"dt_published": null
+			}
+		],
+		"paginator": {
+			"total_items": 3,
+			"total_pages": 1,
+			"current_page": 1,
+			"per_page": 20,
+			"has_next": false,
+			"has_prev": false
 		}
-	],
-	"paginator": {
-		"total_items": 15,
-		"total_pages": 1,
-		"current_page": 1,
-		"per_page": 20
 	}
 }
 ```
@@ -319,22 +358,24 @@
 ### Тело запроса (JSON):
 ```json
 {
-	"title": "Заголовок статьи",
-	"description": "Краткое описание",
-	"content": "<p>Полный текст статьи в HTML</p>",
-	"image": "https://example.com/cover.jpg",
-	"category": "news",
-	"publish": false
+  "title": "Новые функции",
+  "description": "Вторая новость",
+  "content": "# Заголовок\n\nТекст новости в **Markdown**.",
+  "image": "https://example.com/image_22.jpg",
+  "category": "news",
+  "publish": false
 }
 ```
 | Поле | Тип | Обязательное | Описание |
 |------|-----|--------------|----------|
 | title | string | Да | Заголовок статьи |
-| content | string | Да | HTML-содержимое статьи |
-| description | string | Нет | Краткое описание (аннотация) |
-| image | string | Нет | URL обложки |
+| content | string | Да | Содержимое статьи в Markdown |
+| description | string | Нет | Краткое описание |
+| image | string | Нет | URL изображения |
 | category | string | Нет | Категория (по умолчанию `news`) |
 | publish | bool | Нет | Опубликовать сразу после создания (по умолчанию `false`) |
+
+> Уведомления для пользователей добавляются только после публикации. Если правки и согласования не потребуются, можно передать сразу "publish": true. Уведомления будут созданы без необходимости вызывать дополнительные методы
 
 ### Ответ:
 - **200 OK**
@@ -353,10 +394,10 @@
 ## `editArticle`
 ### Доступ: `admin`
 
-**PUT** `/api/v1/articles/editArticle/{id}`
+**POST** `/api/v1/articles/editArticle/{id}`
 
 ### Описание:
-Редактировать существующую статью. Доступно только администраторам или автору статьи.
+Редактировать существующую статью.
 
 ### Параметры пути (URL):
 | Параметр | Тип | Описание |
@@ -368,14 +409,14 @@
 {
 	"title": "Новый заголовок",
 	"description": "Обновлённое описание",
-	"content": "<p>Новый текст статьи</p>",
+	"content": "Markdown text",
 	"image": "https://example.com/new_cover.jpg",
 	"category": "tutorial",
 	"publish": true,
 	"status": "archived"
 }
 ```
-Все поля необязательны. Если передано `publish: true`, статья будет опубликована. Если `status: "archived"` – переведена в архив.
+Передаются поля, которые надо изменить. Например, чтобы поменять статус, надо передать только `"status": "archived"`
 
 ### Ответ:
 - **200 OK**
@@ -428,7 +469,7 @@
 ---
 
 ## `getNotPublished`
-### Доступ: `admin` (несмотря на указание `user` в конфигурации)
+### Доступ: `admin`
 
 **GET** `/api/v1/articles/getNotPublished`
 
@@ -465,5 +506,5 @@
 	}
 }
 ```
-> **Примечание:** Несмотря на указанный в конфигурации доступ `user`, в коде контроллера присутствует проверка `$this->isAdmin`. В текущей версии метод доступен только администраторам.
+
 
