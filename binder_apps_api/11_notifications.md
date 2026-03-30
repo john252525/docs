@@ -152,14 +152,19 @@
 	"ok": true,
 	"message": "Notification retrieved",
 	"data": {
-		"id": 1,
-		"user_id": 42,
+		"id": "64",
+		"user_id": "170",
 		"type": "article",
-		"item_id": 5,
-		"title": "Новая статья опубликована",
-		"body": "Опубликована статья 'Как работать с API'",
-		"is_read": 0,
-		"dt_ins": "2025-03-20 10:00:00"
+		"item_id": "2",
+		"is_read": "0",
+		"dt_read": null,
+		"dt_ins": "2026-03-23 21:37:02",
+		"dt_upd": "2026-03-23 21:37:02",
+		"entity": {
+			"title": "Важное обновление",
+			"description": "Краткое описание новости",
+			"content": "# Заголовок\n\nТекст новости в **Markdown**."
+		}
 	}
 }
 ```
