@@ -35,3 +35,5 @@ Authorization: Bearer d83yhd8346...dsfds
 
 `message` - Общее сообщение об ошибке
 `errors` - Массив конкретных ошибок, одна или больше
+
+

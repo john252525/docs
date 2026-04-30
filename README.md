@@ -14,9 +14,14 @@
 [Uon Account API](binder_apps_api/09_uon_account.md)\
 [User Notifications API](binder_apps_api/11_notifications.md)
 
-## Документация Touchapi chats API для приложений
-[Общая информация по API](touchapi-chats-api/00_common.md)\
-[API methods](touchapi-chats-api/01_methods.md)
+## Документация Touchapi API для приложений
+
+### Touchapi chats
+[Общая информация по API](touchapi-services/touchapi-chats-api/00_common.md)\
+[Chats API methods](touchapi-services/touchapi-chats-api/01_methods.md)
+
+### Touchapi instagram
+[Подключение аккаунта](touchapi-services/touchapi-instagram/01_auth_flow.md)\
 
 
 
